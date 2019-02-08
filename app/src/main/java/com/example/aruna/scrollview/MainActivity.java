@@ -8,10 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     Context context;
+    Integer index;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,19 @@ public class MainActivity extends AppCompatActivity {
             View v = LayoutInflater.from(context).inflate(R.layout.custom_lay, ll, false);
 
             v.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+            final LinearLayout carlay = (LinearLayout) v.findViewById(R.id.ll_items);
+            carlay.setTag(i);
+
+            carlay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    index = Integer.parseInt(v.getTag().toString());
+
+                    Toast.makeText(context, "Icon Number : " + String.valueOf(index),
+                            Toast.LENGTH_LONG).show();
+                }
+            });
 
             ll.addView(v);
 
